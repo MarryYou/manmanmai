@@ -1,0 +1,140 @@
+html,
+body {
+	background: #f7f7f7;
+}
+
+.header {
+	background: #F4483E;
+	color: #FFFFFF;
+	height: 46px;
+	width: 100%;
+	position: relative;
+}
+
+.header_l {
+	width: 80%;
+	padding: 8px;
+	text-align: left;
+	overflow: hidden;
+}
+
+.header_l h1 {
+	font-size: 20px;
+	text-align: center;
+	margin-left: 5px;
+	line-height: 30px;
+}
+
+.mui-icon {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.header_l .logo {
+	display: block;
+	padding-right: 20px;
+	font-size: 30px;
+	color: #fff;
+}
+
+.mui-content {
+	padding: 0 !important;
+	background: #fff;
+	margin-top: -5px;
+}
+
+.container {
+	max-width: 960px;
+	margin: 0px auto;
+}
+
+.header_l .logo img {
+	max-height: 25px;
+	overflow: hidden;
+}
+
+.header_r {
+	padding: 7px;
+}
+
+.header_r .app img {
+	max-height: 34px;
+	overflow: hidden;
+}
+
+.quan-box {
+	background: #fff;
+	text-align: left;
+}
+
+.quan-model {
+	background: #FFFFFF;
+	margin: 10px auto;
+}
+
+.quan-model .bd {
+	padding-bottom: 6px;
+}
+
+.coupon_info {
+	float: left;
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+	border: 1px solid #eeeeee;
+	display: block;
+	height: 75px;
+	margin-left: 5px;
+	overflow: hidden;
+	padding-top: 5px;
+	text-align: center;
+	width: 31%;
+	font-size: 12px;
+}
+
+.quan-model .bd ul li a {
+	height: 100%;
+	display: block;
+	text-align: center;
+	color: #666;
+}
+
+.nav {
+	margin-top: 20px;
+	height: 36px;
+	background-color: #ebebeb;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#ebebeb));
+	background: -moz-linear-gradient(top, #ffffff, #ebebeb);
+	background: -o-linear-gradient(top, #ffffff, #ebebeb);
+	border-top: solid 1px #ebebeb;
+	border-bottom: 1px solid #ccc;
+	line-height: 36px;
+	padding-left: 8px;
+	font-size: 14px;
+}
+#ctl00_foot .foot_top {
+	margin-top: 10px;
+	background: #efefef;
+	border-top: 1px solid #c4c4c4;
+	border-bottom: 1px solid #c4c4c4;
+	height: 34px;
+	line-height: 34px;
+	margin-top: 25px;
+	clear: both;
+}
+#ctl00_foot .foot_top a{
+	box-sizing: border-box;
+    float: left;
+    font-size: 14px;
+    border-right: 1px solid #c4c4c4;
+    text-align: center;
+    width: 30%;
+}
+#ctl00_foot .footer{
+	background: #efefef;
+    text-align: center;
+    font-size: 12px;
+    padding: 15px 0;
+    color: #666;
+}

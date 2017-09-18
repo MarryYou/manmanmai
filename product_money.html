@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/product_money.css" />
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+	</head>
+	<script src="js/mui.min.js"></script>
+	<script type="text/javascript">
+		mui.init()
+	</script>
+
+	<body>
+		<header class="mui-bar mui-bar-nav header">
+			<div class="header_l mui-pull-left">
+				<a href="moneyctrl.html" class="logo mui-pull-left mui-icon mui-icon-back">
+				</a>
+				<h1>国内折扣</h1>
+			</div>
+			<div class="header_r mui-pull-right">
+				<a href="#" class="app">
+					<img src="images/header_app.png" />
+				</a>
+			</div>
+		</header>
+		<div class="mui-content">
+			<div id="container">
+
+			</div>
+			<div id="ctl00_foot">
+				<div class="foot_top">
+					<a href="javascript:;">登录</a>
+					<a href="javascript:;">注册</a>
+					<a href="#" style="width: 40%; border: 0;">
+						<img src="http://www.zuyushop.com/wap/images/top.jpg" width="15" height="15">返回顶部</a>
+				</div>
+				<div class="footer">
+					<p>
+						<a href="javascript:;" style="color: Red;">手机APP下载</a>
+						<a href="javascript:;">
+							慢慢买手机版</a> -- 掌上比价平台</p>
+					<p>
+						m.manmanbuy.com
+						<img src="http://c.cnzz.com/wapstat.php?siteid=1256699064&amp;r=http%3a%2f%2fm.manmanbuy.com%2fcuxiao.aspx&amp;rnd=1245025359" width="0" height="0">
+					</p>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<!--http://182.254.146.100:3000/api/getmoneyctrlproduct?productid=20-->
+<script type="text/html" id="product_info">
+	{{each result as value i}}
+	<div class="cu-content">
+		<h3 class="title">{{value.productName}}</h3>
+		<h4>{{value.productPinkage}}</h4>
+		<div class="info">
+			<span class="mall mui-pull-left">{{value.productFrom}}</span>
+			<span class="addtime mui-pull-left" style="margin-right: 4px;">{{value.productTime}}</span> <span class="author mui-pull-left">{{value.productTips}}</span>
+
+		</div>
+		<div class="content clearfix">
+			<div class="picwrap">{{#value.productImgSm}}</div>
+
+			<div class="conn">
+				<!--内容开始-->
+				<p>{{value.productInfo}}</p>
+				<p itemprop="description">{{value.productInfo1}}</p>
+				<!--内容结束-->
+			</div>
+		</div>
+		<div class="golink">
+			<a href="javascript:;" target="_blank" class="a-gobuy"><i class="icon-gobuy"></i>前往购买</a>
+		</div>
+		{{#value.productComment}}
+	</div>
+	{{/each}}
+</script>
+<script>
+	$(function() {
+		loadajax('http://127.0.0.1:3000/api/getmoneyctrlproduct', {
+				'productid': localStorage.getItem('productId')
+			},
+			function(data) {
+				var html = template('product_info', data);
+				$('#container').html(html);
+
+				console.log(data);
+			});
+	})
+
+	function loadajax(url, data, callback) {
+		$.ajax({
+			type: "get",
+			url: url,
+			async: true,
+			data: data,
+			dataType: 'jsonp',
+			success: function(data) {
+				callback(data);
+			}
+		});
+	}
+</script>

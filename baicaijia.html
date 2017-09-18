@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/baicaijia.css" />
+	</head>
+	<script src="js/mui.min.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/template.js"></script>
+	<script type="text/javascript">
+		mui.init()
+	</script>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav header">
+			<div class="header_l mui-pull-left">
+				<a href="index.html" class="logo mui-pull-left mui-icon mui-icon-back">
+				</a>
+				<h1>白菜价-淘宝内部劵</h1>
+			</div>
+			<div class="header_r mui-pull-right">
+				<a href="#" class="app">
+					<img src="images/header_app.png" />
+				</a>
+			</div>
+		</header>
+		<div class="mui-content">
+			<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				<div class="mui-scroll" id="title">
+					<a class="mui-control-item mui-active ">
+						推荐
+					</a>
+				</div>
+			</div>
+			<ul class="mui-table-view" id="product_ul">
+
+			</ul>
+			<div id="ctl00_foot">
+				<div class="foot_top">
+					<a href="javascript:;">登录</a>
+					<a href="javascript:;">注册</a>
+					<a href="#" style="width: 40%; border: 0;">
+						<img src="http://www.zuyushop.com/wap/images/top.jpg" width="15" height="15">返回顶部</a>
+				</div>
+				<div class="footer">
+					<p>
+						<a href="javascript:;"style="color: Red;">手机APP下载</a>
+						<a href="javascript:;">
+							慢慢买手机版</a> -- 掌上比价平台</p>
+					<p>
+						m.manmanbuy.com
+						<img src="http://c.cnzz.com/wapstat.php?siteid=1256699064&amp;r=http%3a%2f%2fm.manmanbuy.com%2fcuxiao.aspx&amp;rnd=1245025359" width="0" height="0">
+					</p>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script type="text/html" id="tit_info">
+	{{each result as value i}}
+	<a class="mui-control-item ">
+		{{value.title}}
+	</a>
+	{{/each}}
+</script>
+<script type="text/html" id="product_li">
+	{{each result as value i}}
+	<li class="mui-table-view-cell mui-media">
+			<div class=" mui-pull-left proCon_img">{{#value.productImg}}</div>
+			<div class="mui-media-body pro_tit">
+				<p class="title">{{#value.productName}}</p>
+				<p class="mui-ellipsis">{{#value.productPrice}}</p>
+				{{#value.productCouponRemain}}
+				
+					<div class="mui-pull-left  freeProCon">
+						{{#value.productCoupon}}
+					</div>
+					<div class="mui-pull-right  freelink">
+						{{#value.productHref}}
+					</div> 
+			</div>
+	</li>
+	{{/each}}
+</script>
+<script>
+	$(function() {
+		loadajax('http://127.0.0.1:3000/api/getbaicaijiatitle', {},
+			function(data) {
+				console.log(data);
+				var html = template('tit_info', data);
+				$('#title').html(html);
+				document.querySelector('#title').children[0].classList.add('mui-active');
+				var titles = document.querySelector('#title').children;
+				for(var i = 0; i < titles.length; i++) {
+					titles[i].titleId = data.result[i].titleId;
+					titles[i].addEventListener('tap', function() {
+						console.log(this.titleId);
+						loadajax('http://127.0.0.1:3000/api/getbaicaijiaproduct', {
+								titleid: this.titleId
+							},
+							function(data) {
+								console.log(data);
+								var html = template('product_li',data);
+								$('#product_ul').html(html);
+							})
+					})
+				}
+
+			})
+							loadajax('http://127.0.0.1:3000/api/getbaicaijiaproduct', {
+								titleid: 0
+							},
+							function(data) {
+								console.log(data);
+								var html = template('product_li',data);
+								$('#product_ul').html(html);
+							})
+	})
+
+	function loadajax(url, data, callback) {
+		$.ajax({
+			type: "get",
+			url: url,
+			async: true,
+			data: data,
+			dataType: 'jsonp',
+			success: function(data) {
+				callback(data);
+			}
+		});
+	}
+</script>

@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/category.css" />
+	</head>
+	<script src="js/mui.min.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/template.js"></script>
+	<script type="text/javascript">
+		mui.init()
+	</script>
+
+	<body>
+		<header class="mui-bar mui-bar-nav header">
+			<div class="header_l mui-pull-left">
+				<a href="#" class="logo">
+					<img src="images/header_logo.png" />
+				</a>
+			</div>
+			<div class="header_r mui-pull-right">
+				<a href="#" class="app">
+					<img src="images/header_app.png" />
+				</a>
+			</div>
+		</header>
+		<div class="mui-content">
+			<div class="mui-input-row mui-search search">
+				<input type="search" class="mui-input-clear" placeholder="请输入想比价的商品">
+			</div>
+			<div class="brief">
+				<div class="briefin" id="tb_title">
+
+				</div>
+			</div>
+						<div id="ctl00_foot">
+				<div class="foot_top">
+					<a href="javascript:;">登录</a>
+					<a href="javascript:;">注册</a>
+					<a href="#" style="width: 40%; border: 0;">
+						<img src="http://www.zuyushop.com/wap/images/top.jpg" width="15" height="15">返回顶部</a>
+				</div>
+				<div class="footer">
+					<p>
+						<a href="javascript:;"style="color: Red;">手机APP下载</a>
+						<a href="javascript:;">
+							慢慢买手机版</a> -- 掌上比价平台</p>
+					<p>
+						m.manmanbuy.com
+						<img src="http://c.cnzz.com/wapstat.php?siteid=1256699064&amp;r=http%3a%2f%2fm.manmanbuy.com%2fcuxiao.aspx&amp;rnd=1245025359" width="0" height="0">
+					</p>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script type="text/html" id="tb_tit">
+	{{each result as value i}}
+	<div class="fl_t" id="info">
+		<a href="#" class="open">{{value.title}}</a>
+	</div>
+	<ul class="fl_all mui-clearfix"></ul>
+	{{/each}}
+</script>
+<script>
+	$(function() {
+		loadajax('http://127.0.0.1:3000/api/getcategorytitle', {}, function(data) {
+			var html = template('tb_tit', data);
+			$('#tb_title').html(html);
+			var tits = document.querySelectorAll("#tb_title >div");
+			for(var i = 0; i < tits.length; i++) {				
+				tits[i].titleid = data.result[i].titleId;
+				tits[i].isclick = false;
+                tits[i].addEventListener('tap',function(){  
+                 var alink = this.children[0];
+                 var next = this.nextElementSibling;
+                if(alink.classList.contains('close')){
+                	alink.classList.remove('close');
+                	alink.classList.add('open');
+                	next.style.display = 'none';
+                }else{
+                	alink.classList.add('close');
+                	alink.classList.remove('open');
+                	next.style.display='block';
+                }             
+                for (var i =0;i<tits.length;i++) {
+                	if(tits[i].children[0]!== alink){
+                		 tits[i].children[0].classList.remove('close');
+                	     tits[i].children[0].classList.add('open');
+                	     tits[i].nextElementSibling.style.display="none";
+                	}   
+                 }                 
+             loadajax('http://127.0.0.1:3000/api/getcategory',
+                	{titleid : this.titleid},
+                	function(data){
+                	var str ='';
+                	 for (var i=0;i<data.result.length;i++ ) {
+                	 	str+='<li categoryid='+data.result[i].categoryId+'><a href="#">'+data.result[i].category+'</a></li>';
+                	 }
+                	 $(next).html(str);
+                	 var lis = document.querySelectorAll('li');
+                	   for (var i =0;i<lis.length;i++) {
+                	   	        lis[i].addEventListener('tap',function(){
+                	   	        	console.log(this.getAttribute('categoryid')+'没意思，看了数据残缺不全，这个就这样把');               	   	        	
+                	   	        })
+                	   }
+                	}
+                ) 	
+                })
+			}
+		})
+	})
+
+	function loadajax(url, data, callback) {
+		$.ajax({
+			type: "get",
+			url: url,
+			async: true,
+			data: data,
+			dataType: 'jsonp',
+			success: function(data) {
+				callback(data);
+			}
+		});
+	}
+
+	function product_info(data) {
+		var lis = document.querySelectorAll("#proCon>li");
+		for(var i = 0; i < lis.length; i++) {
+			lis[i].productId = data.result[i].productId;
+			lis[i].addEventListener('tap', function() {
+				localStorage.setItem('productId', this.productId);
+				mui.openWindow({
+					url: 'product_money.html',
+					id: 'product_money'
+				})
+			})
+		}
+	}
+</script>

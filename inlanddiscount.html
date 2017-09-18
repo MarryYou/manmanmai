@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/inlanddiscount.css" />
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav header">
+			<div class="header_l mui-pull-left">
+				<a href="index.html" class="logo mui-pull-left mui-icon mui-icon-back">
+				</a>
+				<h1>国内折扣</h1>
+			</div>
+			<div class="header_r mui-pull-right">
+				<a href="#" class="app">
+					<img src="images/header_app.png" />
+				</a>
+			</div>
+		</header>
+		<div class="mui-content">
+			<div class="container">
+				<ul id="list_info">
+
+				</ul>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script type="text/html" id="list">
+	{{each result as value i}}
+	<li class="border-img mui-pull-left">
+		<a href="javascript:;" title="{{value.productName}}">
+			<div class="img"> {{#value.productImg}}</div>
+			<div class="title  ">{{value.productName}}</div>
+			<div class="subtit ">{{value.productPrice}}</div>
+			<div class="info ">
+				<div class="mall text-oneLine ">{{value.productFrom}} |{{value.productTime}}</div>
+			</div>
+		</a>
+	</li>
+	{{/each}}
+</script>
+<script>
+	$(function() {
+		loadajax('http://127.0.0.1:3000/api/getinlanddiscount', {}, function(data) {
+			console.log(data);
+			var html = template('list', data);
+			$('#list_info').html(html);
+			product_info(data);
+		})
+	})
+
+	function loadajax(url, data, callback) {
+		$.ajax({
+			type: "get",
+			url: url,
+			async: true,
+			data: data,
+			dataType: 'jsonp',
+			success: function(data) {
+				callback(data);
+			}
+		});
+	}
+
+	function product_info(data) {
+		var lis = document.querySelectorAll("#list_info >li");
+		for(var i = 0; i < lis.length; i++) {
+			lis[i].productId = data.result[i].productId;
+			lis[i].addEventListener('tap', function() {
+				localStorage.setItem('productId', this.productId);
+				console.log(this)
+				mui.openWindow({
+					url: 'inlanddiscount_product.html',
+					id: 'inlanddiscount_product'
+				})
+			})
+		}
+	}
+</script>

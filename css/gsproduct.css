@@ -1,0 +1,63 @@
+html,
+body {
+	background: #f7f7f7;
+}
+
+.header {
+	background: #ff8b00;
+	color: #FFFFFF;
+	height: 46px;
+	width: 100%;
+	position: relative;
+}
+
+.header_l {
+	width: 80%;
+	padding: 8px;
+	text-align: left;
+	overflow: hidden;
+}
+
+.header_l h1 {
+	font-size: 20px;
+	text-align: center;
+	margin-left: 5px;
+	line-height: 30px;
+}
+
+.mui-icon {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.header_l .logo {
+	display: block;
+	padding-right: 20px;
+	font-size: 30px;
+	color: #fff;
+}
+
+.mui-content {
+	padding: 0 !important;
+	background: #fff;
+	margin-top: -5px;
+}
+
+.container {
+	max-width: 960px;
+	margin: 0px auto;
+}
+
+.header_l .logo img {
+	max-height: 25px;
+	overflow: hidden;
+}
+
+.header_r {
+	padding: 7px;
+}
+
+.header_r .app img {
+	max-height: 34px;
+	overflow: hidden;
+}

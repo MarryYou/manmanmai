@@ -1,0 +1,179 @@
+html,
+body {
+	background: #f7f7f7;
+}
+
+.header {
+	background: #F4483E;
+	color: #FFFFFF;
+	height: 46px;
+	width: 100%;
+	position: relative;
+}
+
+.header_l {
+	width: 80%;
+	padding: 8px;
+	text-align: left;
+	overflow: hidden;
+}
+
+.header_l h1 {
+	font-size: 20px;
+	text-align: center;
+	margin-left: 5px;
+	line-height: 30px;
+}
+
+.mui-icon {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.header_l .logo {
+	display: block;
+	padding-right: 20px;
+	font-size: 30px;
+	color: #fff;
+}
+
+.mui-content {
+	padding: 0 !important;
+	background: #fff;
+}
+
+.container {
+	max-width: 960px;
+	margin: 0px auto;
+}
+
+.header_l .logo img {
+	max-height: 25px;
+	overflow: hidden;
+}
+
+.header_r {
+	padding: 7px;
+}
+
+.header_r .app img {
+	max-height: 34px;
+	overflow: hidden;
+}
+
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+	color: #F4483E;
+}
+
+#product_ul img {
+	display: block;
+	margin-top: 8px;
+	width: 90px;
+	height: 90px;
+}
+
+#product_ul .proCon_img {
+	padding-right: 10px;
+}
+
+.pro_tit {
+	margin-left: 30px;
+}
+
+.pro_tit .title {
+	color: #000;
+}
+
+.pro_tit p {
+	color: #F4483E;
+}
+
+.pro_tit p del {
+	color: #666;
+	padding-left: 10px;
+}
+
+.bar i {
+	float: left;
+	position: relative;
+	margin-top: 4px;
+	width: 80px;
+	height: 12px;
+	border: 1px solid #f40;
+	background: pink;
+	border-radius: 5px;
+}
+
+.bar i em {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 10px;
+	background: #F4483E;
+}
+
+.bar i span {
+	position: absolute;
+	left: 30px;
+	top: -4px;
+	color: #fff;
+}
+
+.bar b {
+	margin-left: 5px;
+	color: #F4483E;
+}
+
+.freeProCon {
+	padding: 10px 0;
+}
+
+.freeProCon a {
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 5px;
+	color: #F4483E;
+	border: 1px dashed #F4483E;
+}
+
+.freelink {
+	padding: 10px 0;
+}
+
+.freelink a {
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 5px;
+	border-radius: 5px;
+	background: #F4483E;
+	color: #fff;
+}
+
+#ctl00_foot .foot_top {
+	background: #efefef;
+	border-top: 1px solid #c4c4c4;
+	border-bottom: 1px solid #c4c4c4;
+	height: 34px;
+	line-height: 34px;
+	margin-top: 1px;
+	clear: both;
+}
+
+#ctl00_foot .foot_top a {
+	box-sizing: border-box;
+	float: left;
+	font-size: 14px;
+	border-right: 1px solid #c4c4c4;
+	text-align: center;
+	width: 30%;
+}
+
+#ctl00_foot .footer {
+	background: #efefef;
+	text-align: center;
+	font-size: 12px;
+	padding: 15px 0;
+	color: #666;
+}

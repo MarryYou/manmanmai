@@ -1,0 +1,142 @@
+html,
+body {
+	background: #f7f7f7;
+}
+.header {
+	background: #ff841d;
+	color: #FFFFFF;
+	height: 46px;
+	width: 100%;
+	position: relative;
+}
+
+.header_l {
+	width: 80%;
+	padding: 8px;
+	text-align: left;
+	overflow: hidden;
+}
+
+.header_l h1 {
+	font-size: 20px;
+	text-align: center;
+	margin-left: 5px;
+	line-height: 30px;
+}
+
+.mui-icon {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.header_l .logo {
+	display: block;
+	padding-right: 20px;
+	font-size: 30px;
+	color: #fff;
+}
+
+.mui-content {
+	padding: 0 !important;
+	max-width: 960px;
+	background-color: #ffffff;
+	text-align: left;
+	font-size: 14px;
+	margin: 0px auto;
+}
+
+.container {
+	max-width: 960px;
+	margin: 0px auto;
+}
+
+.header_l .logo img {
+	max-height: 25px;
+	overflow: hidden;
+}
+.header_r{
+	height: 46px;
+	overflow: hidden;
+}
+.header_r a {
+	display: block;
+	margin: 7px;
+}
+
+.header_r .app img {
+	max-height: 34px;
+	overflow: hidden;
+}
+
+#list_info li {
+	list-style: none;
+	float: left;
+	display: table-cell;
+	padding: 10px 0 10px 10px;
+	text-align: center;
+	vertical-align: middle;
+	background: none;
+	width: 50%;
+	background: #FFFFFF;
+	border: 1px solid #eeeeee;
+	border-image: url(data:image/gif;base64,R0lGODlhBQAFAIABAN3d3f///yH5BAEAAAEALAAAAAAFAAUAAAIHhB9pGatnCgA7) 2 stretch;
+	-webkit-border-image: url(data:image/gif;base64,R0lGODlhBQAFAIABAN3d3f///yH5BAEAAAEALAAAAAAFAAUAAAIHhB9pGatnCgA7) 2 stretch;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border-top-width: 0;
+	overflow: hidden;
+}
+
+#list_info {
+	width: 100%;
+}
+
+.border-img .img {
+	margin: 10px auto;
+	overflow: hidden;
+	width: 140px;
+	height: 140px;
+}
+
+.border-img .img img {
+	width: 140px;
+	height: 140px;
+	vertical-align: middle;
+}
+
+.border-img .subtit {
+	word-break: keep-all;
+	/* 不换行 */
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.border-img .title {
+	color: #333333;
+	word-break: break-all;
+	padding: 0 8px;
+	font-size: 12px;
+	text-align: left;
+	text-align-last: left;
+	/*line-height: 18px;*/
+	height: 36px;
+	word-break: break-all;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.text-oneLine {
+	display: block;
+	/*内联对象需加*/
+	word-break: keep-all;
+	/* 不换行 */
+	white-space: nowrap;
+	/* 不换行 */
+	overflow: hidden;
+	/* 内容超出宽度时隐藏超出部分的内容 */
+	text-overflow: ellipsis;
+	/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}

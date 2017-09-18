@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav header">
+			<div class="header_l mui-pull-left">
+				<a href="#" class="logo">
+					<img src="images/header_logo.png" />
+				</a>
+			</div>
+			<div class="header_r mui-pull-right">
+				<a href="#" class="app">
+					<img src="images/header_app.png" />
+				</a>
+			</div>
+		</header>
+		<div class="mui-content">
+			<div class="mui-input-row mui-search search">
+				<input type="search" class="mui-input-clear" placeholder="请输入想比价的商品">
+			</div>
+			<div class="big-classify" id="menu">
+			</div>
+			<a href="javascript:;">
+				<div class="jxhd">
+					<span class="mui-pull-left">超值折扣推荐</span>
+					<img class="mui-pull-right" src="images/more.png" / width="20">
+				</div>
+			</a>
+			<div class="jxhdc">
+				<div class="cu-list" id="cxdiv">
+					<ul id="proCon">
+					</ul>
+					<div class="more_bar">
+						<a href="moneyctrl.html">更多优惠信息 »</a>
+					</div>
+				</div>
+			</div>
+			<a href="javascript:;" style="color: #fff;">
+				<div class="jxhd" style="margin-top: 5px; margin-bottom: 6px;">
+					<span class="mui-pull-left">品牌排行</span><img src="http://www.zuyushop.com/wap/images/more.png" width="20" height="20" class="mui-pull-right"></div>
+			</a>
+			<div id="ctl00_foot">
+				<div class="foot_top">
+					<a href="javascript:;">登录</a>
+					<a href="javascript:;">注册</a>
+					<a href="#" style="width: 40%; border: 0;">
+						<img src="http://www.zuyushop.com/wap/images/top.jpg" width="15" height="15">返回顶部</a>
+				</div>
+				<div class="footer">
+					<p>
+						<a href="javascript:;"style="color: Red;">手机APP下载</a>
+						<a href="javascript:;">
+							慢慢买手机版</a> -- 掌上比价平台</p>
+					<p>
+						m.manmanbuy.com
+						<img src="http://c.cnzz.com/wapstat.php?siteid=1256699064&amp;r=http%3a%2f%2fm.manmanbuy.com%2fcuxiao.aspx&amp;rnd=1245025359" width="0" height="0">
+					</p>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script type="text/html" id="menuinfo">
+
+	<div class="row mui-clearfix">
+		{{each result as value i }}
+		<div class="areaitem mui-pull-left ">
+			<a href="{{value.titlehref}}">
+				<!--{{value.titlehref}}-->
+				<div class="pic">
+					{{#value.img}}
+				</div>
+				<div class="name">
+					{{value.name}}</div>
+			</a>
+		</div>
+		{{/each}}
+	</div>
+</script>
+<script type="text/html" id="product">
+
+	{{each result as value i}}
+	<li class="mui-clearfix proCon">
+		<a href="javascript:;">
+			<div class="pic mui-pull-left">{{#value.productImgSm}}</div>
+			<div class="mui-clearfix info">
+				<div class="title">{{value.productName}} <span>{{value.productPinkage}}</span></div>
+				<div class="other"><span class="mall">{{value.productFrom}}| {{value.productTime}}</span></div>
+				<!--<span class="comment"><i class="icon-comment"></i>0</span>-->
+			</div>
+		</a>
+	</li>
+	{{/each}}
+
+</script>
+<script>
+	$(function() {
+		loadajax("http://127.0.0.1:3000/api/getindexmenu", {},
+			function(data) {
+				var html = template('menuinfo', data);
+				$("#menu").html(html);
+				var lis = document.querySelectorAll(".areaitem");
+				for(var i = 0; i < lis.length; i++) {
+					if(i > 7) {
+						lis[i].classList.add("hidden");
+					}
+				}
+				var more = lis[7];
+				more.addEventListener('tap', function() {
+					if(lis[8].classList.contains('hidden')) {
+						for(var i = 8; i < lis.length; i++) {
+							lis[i].classList.remove('hidden');
+						}
+					} else {
+						for(var i = 8; i < lis.length; i++) {
+							lis[i].classList.add('hidden');
+						}
+					}
+				})
+			});
+		loadajax("http://127.0.0.1:3000/api/getmoneyctrl", {},
+			function(data) {
+				var html = template('product', data);
+				$('#proCon').html(html);
+				product_info(data);
+			})
+	})
+
+	function loadajax(url, data, callback) {
+		$.ajax({
+			type: "get",
+			url: url,
+			async: true,
+			data: data,
+			dataType: 'jsonp',
+			success: function(data) {
+				callback(data);
+			}
+		});
+	}
+	function product_info(data){
+	  	var lis = document.querySelectorAll("#proCon>li");
+				for (var i=0;i<lis.length;i++) {
+					 lis[i].productId = data.result[i].productId;
+					 lis[i].addEventListener('tap',function(){
+					 	 localStorage.setItem('productId',this.productId);
+					 	 mui.openWindow({
+					 	 	url:'product_money.html',
+					 	 	id:'product_money'
+					 	 })
+					 })
+				}
+	}
+</script>
+<!--//http://182.254.146.100:3000/api/ 地址接口-->

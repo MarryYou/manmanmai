@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/couponproduct.css" />
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/template.js"></script>
+	</head>
+	<script src="js/mui.min.js"></script>
+	<script type="text/javascript">
+		mui.init({
+			gestureConfig: {
+				tap: true, //默认为true
+				doubletap: true, //默认为false
+				longtap: true, //默认为false
+				swipe: true, //默认为true
+				drag: true, //默认为true
+				hold: false, //默认为false，不监听
+				release: false //默认为false，不监听
+			}
+		});
+	</script>
+
+	<body>
+		<header class="mui-bar mui-bar-nav header">
+			<div class="header_l mui-pull-left">
+				<a href="coupon.html" class="logo mui-pull-left mui-icon mui-icon-back">
+				</a>
+				<h1 id="tit">优惠劵</h1>
+			</div>
+			<div class="header_r mui-pull-right">
+				<a href="#" class="app">
+					<img src="images/header_app.png" />
+				</a>
+			</div>
+		</header>
+		<div class="mui-content">
+			<div class="quan-box">
+				<div id="ctl00_ContentBody_quanlist" class="quan-list" data-gallery="one">
+					<ul id="coupon_list">
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="galleryOverlay" class="">
+			<div class="silder_container mui-clearfix">
+				<ul class="silder mui-clearfix" id="ul_silder">
+				</ul>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script type="text/html" id="coupon_list_li">
+	{{each result as value i}}
+	<li>
+		<a href="javascript:;">
+			<div class="pic">{{#value.couponProductImg}}</div>
+			<div class="info">
+				<div class="tit">
+					<h3>{{value.couponProductName}}</h3>
+					<h2>{{value.couponProductPrice}}</h2>
+				</div>
+				<div class="time">{{value.couponProductTime}}</div>
+			</div>
+		</a>
+	</li>
+	{{/each}}
+</script>
+<script type="text/html" id="silder_li">
+	{{each result as value i}}
+	<li class="mui-pull-left">{{#value.couponProductImg}}</li>
+	{{/each}}
+</script>
+<script>
+	var index = 0;
+	var maxIndex=0;
+	var width =0;
+	$(function() {
+	
+		$('#tit').html(localStorage.getItem('couponTitle') + '优惠');
+		loadajax('http://127.0.0.1:3000/api/getcouponproduct', {
+				couponid: localStorage.getItem('couponId')
+			},
+			function(data) {
+				console.log(data);
+				var html = template('coupon_list_li', data);
+				$('#coupon_list').html(html);
+				var couponListLis = document.querySelectorAll("#coupon_list>li");
+				maxIndex = couponListLis.length;
+				console.log(maxIndex)
+				var str = template('silder_li',data);
+			document.querySelector('#ul_silder').style.width = 320 * couponListLis.length+"px";		
+				$('#ul_silder').html(str);
+				var silderLis = document.querySelectorAll('#coupon_list >li');
+				console.log(silderLis);
+				for (var i=0;i<silderLis.length;i++) {
+				    silderLis[i].imgId = i;
+				    silderLis[i].addEventListener('tap',function(){
+//                    console.log(this.imgId);
+document.querySelector('#galleryOverlay').style.display="block";                  document.querySelector('#galleryOverlay').classList.add('visible');  
+  index = this.imgId;
+document.querySelector('#ul_silder').style.transform = "translateX(" + (-320 * index) + "px)";
+				    })
+				}
+				swipe();
+			});
+	})
+
+	function loadajax(url, data, callback) {
+		$.ajax({
+			type: "get",
+			url: url,
+			async: true,
+			data: data,
+			dataType: 'jsonp',
+			success: function(data) {
+				callback(data);
+			}
+		});
+	}
+
+	function swipe() {
+		document.querySelector('.silder_container').addEventListener('swiperight', function() {
+			index--;
+			if((index * -320) >= 0) {
+				index = 0;
+			}
+			document.querySelector('#ul_silder').style.transform = "translateX(" + -(320 * index) + "px)";
+		});
+		document.querySelector('.silder_container').addEventListener('swipeleft', function() {
+			index++;
+			var width = $('#ul_silder').width();
+			if((index *320)>=width){
+			  index = maxIndex;
+				return;
+			}
+//			console.log(width);
+			document.querySelector('#ul_silder').style.transform = "translateX(" + (-320 * index) + "px)";
+		});
+		document.querySelector('#galleryOverlay').addEventListener('tap',function(){
+			document.querySelector('#galleryOverlay').style.display="none";                  document.querySelector('#galleryOverlay').classList.remove('visible'); 
+		})
+	}
+</script>

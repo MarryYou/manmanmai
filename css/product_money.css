@@ -1,0 +1,263 @@
+html,
+body {
+	background: #f7f7f7;
+}
+
+.header {
+	background: #ff841d;
+	color: #FFFFFF;
+	height: 46px;
+	width: 100%;
+	position: relative;
+}
+
+.header_l {
+	width: 80%;
+	padding: 8px;
+	text-align: left;
+	overflow: hidden;
+}
+
+.header_l h1 {
+	font-size: 20px;
+	text-align: center;
+	margin-left: 5px;
+	line-height: 30px;
+}
+
+.mui-icon {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.header_l .logo {
+	display: block;
+	padding-right: 20px;
+	font-size: 30px;
+	color: #fff;
+}
+
+.mui-content {
+	padding: 0 !important;
+}
+
+.container {
+	max-width: 960px;
+	margin: 0px auto;
+}
+
+.header_l .logo img {
+	max-height: 25px;
+	overflow: hidden;
+}
+
+.header_r {
+	padding: 7px;
+}
+
+.header_r .app img {
+	max-height: 34px;
+	overflow: hidden;
+}
+
+.container {
+	max-width: 960px;
+	margin: 0px auto;
+}
+
+.cu-content {
+	padding: 4px 10px;
+	background: #FFFFFF;
+}
+
+.cu-content h3 {
+	font-size: 18px;
+	margin: 10px auto 5px auto;
+	font-weight: 800;
+	text-align: left;
+	text-align-last: left;
+	word-break: break-all;
+	color: #5a5a5a;
+	line-height: normal;
+}
+
+.cu-content h4 {
+	color: #ff6c00;
+	display: block;
+	font-size: 15px;
+	margin-bottom: 10px;
+}
+
+
+}
+.cu-content.info {
+	margin: 12px auto !important;
+	color: #999999;
+	font-size: 12px;
+	line-height: 24px;
+}
+.cu-content .info span {
+	display: block;
+	margin: 0px 4px 0px 4px;
+}
+.cu-content .picwrap {
+	width: 120px;
+	float: right;
+	margin: 12px auto auto 10px;
+	overflow: hidden;
+}
+.cu-content .picwrap img {
+	width: 120px;
+	height: 120px;
+	vertical-align: middle;
+	border: none;
+}
+.cu-content .conn {
+	font-size: 16px;
+	word-break: break-all;
+	line-height: 24px;
+	color: #606060;
+	padding-bottom: 20px;
+}
+.cu-content .conn p {
+	line-height: 24px;
+	color: #606060;
+	word-break: break-all;
+	margin: 6px auto;
+}
+.cu-content .conn a {
+	color: #4682c5 !important;
+	text-decoration: none;
+	word-break: break-all;
+}
+.golink a {
+	height: 40px;
+	line-height: 40px;
+	display: block;
+	margin: 10px 10px;
+	background: #FF9000;
+	border-radius: 4px;
+	text-align: center;
+	font-size: 14px;
+	color: #ffffff;
+}
+.cu-content-pl .tit {
+	font-size: 16px;
+	padding: 6px 8px;
+}
+.cu-content-pl .reply {
+	padding: 6px 8px;
+}
+.cu-content-pl .reply .form {
+	border: 2px solid #ECEAE8;
+	border-radius: 2px;
+	padding: 4px 0 0 4px;
+	background-color: #fff;
+	position: relative;
+	width: 98%;
+	margin: 0px auto;
+}
+.cu-content-pl .reply .form textarea {
+	width: 100%;
+	resize: none;
+	overflow-x: hidden;
+	overflow-y: auto;
+	border: none;
+	line-height: 22px;
+	font-size: 14px;
+	outline: 0;
+	color: #666;
+	height: 68px;
+}
+.cu-content-pl .reply .form .ctrl {
+	background-color: #fbfbfb;
+	height: 36px;
+	margin-left: -4px;
+	border-top: solid 1px #f2f2f2;
+}
+.cu-content-pl .reply .form .ctrl input {
+	position: absolute;
+	right: -2px;
+	bottom: -2px;
+	background: #ff841d;
+	border: none;
+	border: 2px solid #ff841d;
+	border-left: none;
+	border-top: none;
+	padding: 0px;
+	width: 100px;
+	height: 39px;
+	color: #fff;
+	outline: 0;
+	border-radius: 0 0 2px 0;
+	font-size: 16px;
+}
+.cu-content-pl .tit {
+	font-size: 16px;
+	padding: 6px 8px;
+}
+.cu-content-pl .list ul li {
+	padding: 18px 10px;
+	background-color: #FFFFFF;
+}
+.cu-content-pl .list .userimg {
+	width: 40px;
+	float: left;
+	overflow: hidden;
+}
+.cu-content-pl .list .con {
+	overflow: hidden;
+	padding-left: 10px;
+}
+.cu-content-pl .list .userimg img {
+	width: 40px;
+	background-position: top;
+	border-radius: 20px;
+	height: 40px;
+}
+.cu-content-pl .list .con .name {
+	margin-bottom: 6px;
+	color: #2e8b01;
+	font-size: 14px;
+}
+.cu-content-pl .list .con .name .username {
+	color: #5997c0;
+	font-size: 13px !important;
+	float: left;
+}
+.cu-content-pl .list .con .name .time {
+	color: #999999;
+	font-size: 13px !important;
+	float: right;
+}
+.cu-content-pl .list .con .content {
+	word-break: break-all;
+	font-size: 15px !important;
+	color: #606060;
+	line-height: 20px;
+}
+#ctl00_foot .foot_top {
+	margin-top: 10px;
+	background: #efefef;
+	border-top: 1px solid #c4c4c4;
+	border-bottom: 1px solid #c4c4c4;
+	height: 34px;
+	line-height: 34px;
+	margin-top: 25px;
+	clear: both;
+}
+#ctl00_foot .foot_top a {
+	box-sizing: border-box;
+	float: left;
+	font-size: 14px;
+	border-right: 1px solid #c4c4c4;
+	text-align: center;
+	width: 30%;
+}
+#ctl00_foot .footer {
+	background: #efefef;
+	text-align: center;
+	font-size: 12px;
+	padding: 15px 0;
+	color: #666;
+}

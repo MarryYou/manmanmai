@@ -1,0 +1,161 @@
+html,
+body {
+	background: #f7f7f7;
+}
+
+.header {
+	background: #ff841d;
+	color: #FFFFFF;
+	height: 46px;
+	width: 100%;
+	position: relative;
+}
+
+.header_l {
+	width: 80%;
+	padding: 8px;
+	text-align: left;
+	overflow: hidden;
+}
+
+.header_l h1 {
+	font-size: 20px;
+	text-align: center;
+	margin-left: 5px;
+	line-height: 30px;
+}
+
+.mui-icon {
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.header_l .logo {
+	display: block;
+	padding-right: 20px;
+	font-size: 30px;
+	color: #fff;
+}
+
+.mui-content {
+	padding: 0 !important;
+}
+
+.container {
+	max-width: 960px;
+	margin: 0px auto;
+}
+
+.header_l .logo img {
+	max-height: 25px;
+	overflow: hidden;
+}
+
+.header_r {
+	padding: 7px;
+}
+
+.header_r .app img {
+	max-height: 34px;
+	overflow: hidden;
+}
+
+.jxhd img {
+	margin-right: 10px;
+	color: #FFF;
+	margin-top: 8px;
+}
+
+.jxhdc {
+	padding-bottom: 10px;
+	float: left;
+	width: 100%;
+	background: #efefef;
+}
+
+.jxhdc .proCon {
+	list-style: none;
+	padding: 14px 8px;
+	position: relative;
+}
+
+.jxhdc .proCon {
+	background: #fff;
+}
+
+.jxhdc .proCon a {
+	display: block;
+}
+
+.jxhdc .pic {
+	width: 110px;
+}
+
+.jxhdc .pic img {
+	width: 100px;
+}
+
+.info .title {
+	color: #333333;
+	word-break: break-all;
+	font-size: 15px;
+	line-height: 19px;
+	min-height: 57px;
+	text-align: left;
+	font-weight: normal;
+}
+
+.info .title span {
+	color: #ff6c00;
+	display: inline;
+}
+
+.info .other {
+	margin-top: 8px;
+	color: #a1a1a1;
+}
+
+.dispage {
+	text-align: center;
+	margin-top: 15px;
+	padding: 0 10px;
+}
+.dispage input{
+	width: 30%;
+}
+.dispage select{
+	margin-left: 5%;
+	width: 30%;
+    border: 1px solid #bababa !important;
+	padding: 0 25px;
+	height: 30px;
+}
+.dispage select option a{
+	display: block;
+}
+#ctl00_foot .foot_top {
+	margin-top: 10px;
+	background: #efefef;
+	border-top: 1px solid #c4c4c4;
+	border-bottom: 1px solid #c4c4c4;
+	height: 34px;
+	line-height: 34px;
+	margin-top: 25px;
+	clear: both;
+}
+#ctl00_foot .foot_top a{
+	box-sizing: border-box;
+    float: left;
+    font-size: 14px;
+    border-right: 1px solid #c4c4c4;
+    text-align: center;
+    width: 30%;
+}
+#ctl00_foot .footer{
+	background: #efefef;
+    text-align: center;
+    font-size: 12px;
+    padding: 15px 0;
+    color: #666;
+}
+
