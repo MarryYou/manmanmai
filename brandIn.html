@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="css/base.css" />
-		<link rel="stylesheet" type="text/css" href="css/brandTitle.css" />
+		<link rel="stylesheet" type="text/css" href="css/brandIn.css" />
 	</head>
 	<script src="js/mui.min.js"></script>
 	<script type="text/javascript" src="js/jquery.js"></script>
@@ -38,11 +38,28 @@
 					<a href="index.html">首页</a> &gt;
 					<a href="brandTitle.html">
 						品牌大全</a>
+					<span id="nav_banner"></span>
 				</div>
-				<div style="font-size: 16px;color:#874604;height: 40px; padding-left:10px; line-height: 40px;margin:5px 0px; border:1px solid #ccc; background-color:#eee;">热门品牌排行</div>
+				<div class="hbanner">
+					<h3 id="hbanner"></h3>
+				</div>
 				<div class="briefin" id="tb_title">
 
 				</div>
+				<div class="hbanner">
+					<h3 id="hbanner2"></h3>
+				</div>
+				<ul class="mui-table-view" id="product">
+				    <li class="mui-table-view-cell mui-media">
+				        <a href="javascript:;">
+				            <img class="mui-media-object mui-pull-left" src="http://placehold.it/40x30">
+				            <div class="mui-media-body">
+				                幸福
+				                <p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
+				            </div>
+				        </a>
+				    </li>
+				</ul>
 			</div>
 			<div id="ctl00_foot">
 				<div class="foot_top">
@@ -65,38 +82,39 @@
 		</div>
 	</body>
 	<script type="text/html" id="tb_tit">
-		{{each result as value i}}
-		<div class="fl_t" id="info">
-			<a href="brandIn.html" class="open">{{value.brandTitle}}</a>
-		</div>
-		{{/each}}
+
+		<ul class="mui-table-view">
+			{{each result as value i}}
+			<li class="mui-table-view-cell">
+				<a class="mui-navigate-right" href="#" title={{value.brandName}}><em class="index">{{value.brandId+1}}</em>
+					<div class="inner">
+						<div class="tit">{{value.brandName}}</div>
+						<p>{{value.brandInfo}}</p>
+					</div>
+				</a>
+			</li>
+			{{/each}}
+		</ul>
+
 	</script>
 	<script>
 		$(function() {
-			loadajax('http://127.0.0.1:3000/api/getbrandtitle', {}, function(data) {
+			var nav_b = document.querySelector("#nav_banner");
+			var hbanner = document.querySelector('#hbanner');
+			var hbanner2 = document.querySelector('#hbanner2');
+			nav_b.innerHTML = '>&nbsp;' + localStorage.getItem('brandTitle') + '哪个牌子好';
+			hbanner.innerHTML =localStorage.getItem('brandTitle') + '哪个牌子好';
+			hbanner2.innerHTML =localStorage.getItem('brandTitle') + '产品销量排行';
+			loadajax('http://127.0.0.1:3000/api/getbrand', {
+				brandtitleid: localStorage.getItem('brandTitleId')
+			}, function(data) {
 				var html = template('tb_tit', data);
 				$('#tb_title').html(html);
-				var brands = document.querySelectorAll('.fl_t');
-				for(var i = 0; i < brands.length; i++) {
-					brands[i].brandTitle = data.result[i].brandTitle;
-					brands[i].brandTitleId = data.result[i].brandTitleId;
-					brands[i].addEventListener('tap', function() {
-						localStorage.setItem('brandTitleId', this.brandTitleId);
-						var str = "";
-						var i = 0;
-						var flag = true;
-						while(flag) {
-							if(this.brandTitle.charAt(i) === "十") {
-								flag = false;
-								break
-							}
-							str += this.brandTitle.charAt(i);
-							i++;
-						}
-						localStorage.setItem('brandTitle', str);
-					})
-				}
-
+				var em_index = document.querySelectorAll('.index');
+				var colors = ['#f10e0e', '#ff9314', '#8adf5b'];
+				colors.forEach(function(v, i) {
+					em_index[i].style.background = v;
+				})
 			})
 		})
 
