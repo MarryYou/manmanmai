@@ -43,6 +43,7 @@
 				<div class="hbanner">
 					<h3 id="hbanner"></h3>
 				</div>
+
 				<div class="briefin" id="tb_title">
 
 				</div>
@@ -50,15 +51,14 @@
 					<h3 id="hbanner2"></h3>
 				</div>
 				<ul class="mui-table-view" id="product">
-				    <li class="mui-table-view-cell mui-media">
-				        <a href="javascript:;">
-				            <img class="mui-media-object mui-pull-left" src="http://placehold.it/40x30">
-				            <div class="mui-media-body">
-				                幸福
-				                <p class="mui-ellipsis">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？</p>
-				            </div>
-				        </a>
-				    </li>
+
+				</ul>
+
+				<div class="hbanner">
+					<h3 id="hbanner3"></h3>
+				</div>
+				<ul id="pllist">
+
 				</ul>
 			</div>
 			<div id="ctl00_foot">
@@ -82,7 +82,6 @@
 		</div>
 	</body>
 	<script type="text/html" id="tb_tit">
-
 		<ul class="mui-table-view">
 			{{each result as value i}}
 			<li class="mui-table-view-cell">
@@ -95,16 +94,53 @@
 			</li>
 			{{/each}}
 		</ul>
-
+	</script>
+	<script type="text/html" id="product_Con">
+		{{each result as value i}}
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				<!--<img class="mui-media-object mui-pull-left" src="http://placehold.it/40x30">-->
+				<div class="mui-pull-left Con_l">
+					{{#value.productImg}}
+				</div>
+				<div class="mui-media-body">
+					<p>{{value.productName}}</p>
+					<p class="mui-ellipsis">{{value.productPrice}}</p>
+					<p class="info"><span>{{value.productQuote}}</span>&nbsp;&nbsp;<span>{{value.productCom}}</span></p>
+				</div>
+			</a>
+		</li>
+		{{/each}}
+	</script>
+	<script type="text/html" id = "pllistIn">
+		{{each result as value}}
+		<li>
+			<div class="plbox">
+				<a href="javascript:;">
+					<div class="name">
+						{{value.comName}}
+						<span class="mui-pull-right">
+						{{value.comTime}}
+					</span>
+					</div>
+					<div class="con">
+						{{value.comContent}}
+					</div>
+				</a>
+			</div>
+		</li>
+		{{/each}}
 	</script>
 	<script>
 		$(function() {
 			var nav_b = document.querySelector("#nav_banner");
 			var hbanner = document.querySelector('#hbanner');
 			var hbanner2 = document.querySelector('#hbanner2');
+			var hbanner3 = document.querySelector('#hbanner3');
 			nav_b.innerHTML = '>&nbsp;' + localStorage.getItem('brandTitle') + '哪个牌子好';
-			hbanner.innerHTML =localStorage.getItem('brandTitle') + '哪个牌子好';
-			hbanner2.innerHTML =localStorage.getItem('brandTitle') + '产品销量排行';
+			hbanner.innerHTML = localStorage.getItem('brandTitle') + '哪个牌子好';
+			hbanner2.innerHTML = localStorage.getItem('brandTitle') + '产品销量排行';
+			hbanner3.innerHTML = localStorage.getItem('brandTitle') + '最新评价';
 			loadajax('http://127.0.0.1:3000/api/getbrand', {
 				brandtitleid: localStorage.getItem('brandTitleId')
 			}, function(data) {
@@ -116,6 +152,24 @@
 					em_index[i].style.background = v;
 				})
 			})
+			loadajax('http://127.0.0.1:3000/api/getbrandproductlist', {
+				brandtitleid: localStorage.getItem('brandTitleId'),
+				pagesize: 4
+			}, function(data) {
+				//				console.log(data);
+				localStorage.setItem('productIds', data.result[0].productId);
+				var html = template('product_Con', data);
+				$('#product').html(html);
+			})
+			loadajax('http://127.0.0.1:3000/api/getproductcom', {
+				productid: localStorage.getItem('productIds')
+			}, function(data) {
+				console.log(data);
+				var html = template('pllistIn',data);
+				$('#pllist').html(html);
+
+			})
+
 		})
 
 		function loadajax(url, data, callback) {
