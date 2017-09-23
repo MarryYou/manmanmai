@@ -7,9 +7,12 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="css/gsproduct.css" />
 	</head>
 	<script src="js/mui.min.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/template.js"></script>
 	<script type="text/javascript">
 		mui.init()
 	</script>
@@ -28,8 +31,161 @@
 			</div>
 		</header>
 		<div class="mui-content">
-			
+			<div class="hd">
+				<div class="filter">
+					<ul id="filter">
+						<li id="shopid">
+							<a href="javascript:;"><span>京东</span><i class="mui-icon mui-icon mui-icon-arrowdown"></i></a>
+						</li>
+						<li id="areaid">
+							<a href="javascript:;"><span>华北（北京、山西等）</span><i class="mui-icon mui-icon mui-icon-arrowdown"></i></a>
+						</li>
+						<li class="">
+							<a href="javascript:;">全部价格<i class="mui-icon mui-icon mui-icon-arrowdown"></i></a>
+						</li>
+					</ul>
+					<div class="popbox">
+						<ul id="popbox">
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="bd mui-clearfix" style="z-index: 1;">
+				<ul class="mui-table-view" id="produ_Con">
+				</ul>
+			</div>
 		</div>
 	</body>
+	<script type="text/html" id="hd_list">
+		{{each result as value i}}
+		<li>
+			<a href="#"><span>{{value.shopName}}</span></a>
+		</li>
+		{{/each}}
+	</script>
+	<script type="text/html" id="area_list">
+		{{each result as value i}}
+		<li>
+			<a href="#"><span>{{value.areaName}}</span></a>
+		</li>
+		{{/each}}
+	</script>
+	<script type="text/html" id="produ">
+		{{each result as value}}
+		<li class="mui-table-view-cell">
+			<a href="javascript:;" class="item border-img">
+				<div class="pic"><img src={{value.productImg}} style="width: 147px; height: 147px;"></div>
+				<div class="title">{{value.productName}}</div>
+				<div class="other">
+					<div class="price">{{value.productPrice}}</div>
+					<div class="mui-clearfix"></div>
+				</div>
+			</a>
+		</li>
+		{{/each}}
+	</script>
+	<script type="text/javascript">
+		$(function() {
+			var lis = document.querySelectorAll('#filter >li');
+			var shopId = document.querySelector('#shopid');
+			var areaId = document.querySelector('#areaid');
+			var popbox = document.querySelector('#popbox');
+			localStorage.setItem('areaId', 0);
+			localStorage.setItem('shopId', 0);
+			loadpro()
+			lis[0].addEventListener('tap', function() {
+				popbox.classList.add('popsort');
+				loadajax('http://127.0.0.1:3000/api/getgsshop', {},
+					function(data) {
+						console.log(data);
+						var html = template('hd_list', data);
+						$("#popbox").html(html);
+						var pop_lis = document.querySelectorAll('#popbox>li');
+						var shopCon = shopId.children[0].children[0].textContent;
+						pop_lis.forEach(function(v, i) {
+							v.shopId = data.result[i].shopId;
+						})
+						pop_lis.forEach(function(v) {
+							if(v.children[0].children[0].textContent === shopCon) {
+								v.children[0].classList.add('on');
+								localStorage.setItem('shopId', v.shopId);
+							}
+						})
+						for(var i = 0; i < pop_lis.length; i++) {
+							pop_lis[i].addEventListener('tap', function() {
+								pop_lis.forEach(function(v) {
+									v.children[0].classList.remove('on');
+								})
+								this.children[0].classList.add('on');
+								var str = this.children[0].children[0].textContent;
+								shopId.children[0].children[0].innerHTML = str;
+								popbox.classList.remove('popsort');
+								localStorage.setItem('shopId', this.shopId)
+								loadpro()
+							})
+						}
 
+					})
+			})
+			lis[1].addEventListener('tap', function() {
+				popbox.classList.add('popsort');
+				loadajax('http://127.0.0.1:3000/api/getgsshoparea', {},
+					function(data) {
+						console.log(data);
+						var html = template('area_list', data);
+						$("#popbox").html(html);
+						var pop_lis = document.querySelectorAll('#popbox>li');
+						var areaCon = areaId.children[0].children[0].textContent;
+						pop_lis.forEach(function(v, i) {
+							v.areaId = data.result[i].areaId;
+						})
+						pop_lis.forEach(function(v) {
+							if(v.children[0].children[0].textContent === areaCon) {
+								v.children[0].classList.add('on');
+								localStorage.setItem('areaId', v.areaId);
+							}
+						})
+						for(var i = 0; i < pop_lis.length; i++) {
+							pop_lis[i].addEventListener('tap', function() {
+								pop_lis.forEach(function(v) {
+									v.children[0].classList.remove('on');
+								})
+								this.children[0].classList.add('on');
+								var str = this.children[0].children[0].textContent;
+								areaId.children[0].children[0].innerHTML = str;
+								popbox.classList.remove('popsort');
+								localStorage.setItem('areaId', this.areaId);
+								loadpro()
+							})
+						}
+
+					})
+			})
+		})
+
+		function loadajax(url, data, callback) {
+			$.ajax({
+				type: "get",
+				url: url,
+				async: true,
+				data: data,
+				dataType: 'jsonp',
+				success: function(data) {
+					callback(data);
+				}
+			});
+		}
+
+		function loadpro() {
+			loadajax('http://127.0.0.1:3000/api/getgsproduct', {
+					shopid: localStorage.getItem('shopId'),
+					areaid: localStorage.getItem('areaId')
+			},function(data) {
+                  console.log(data);
+                  var html = template('produ',data);
+                  $('#produ_Con').html(html);
+				}
+			)
+		}
+	</script>
 </html>

@@ -61,3 +61,147 @@ body {
 	max-height: 34px;
 	overflow: hidden;
 }
+
+.hd {
+	width: 100%;
+	position: relative;
+	height: 38px;
+	display: -webkit-box;
+}
+
+.hd .filter {
+	width: 100%;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-flex: 1;
+	border-bottom: 1px solid #dadada;
+}
+
+.hd .filter ul {
+	width: 100%;
+	list-style: none;
+}
+
+.hd .filter ul li {
+	float: left;
+	line-height: 37px;
+	width: 33%;
+	display: -webkit-box !important;
+	display: box !important;
+	position: relative;
+	-webkit-box-flex: 1;
+	box-flex: 1;
+	box-sizing: border-box;
+}
+
+.hd .filter ul li a {
+	display: -webkit-box !important;
+	display: box !important;
+	position: relative;
+	width: 100%;
+	font-size: 16px;
+	display: block;
+	text-align: center;
+	color: #5a5a5a;
+	-webkit-box-align: center;
+	box-align: center;
+	-webkit-box-pack: center;
+	box-pack: center;
+}
+
+.hd .filter ul li a i {
+	font-size: 16px;
+}
+
+.hd .popbox {
+	width: 100%;
+	background-color: #ffffff;
+	position: absolute;
+	left: 0px;
+	top: 38px;
+     z-index: 1;
+	box-shadow: 0px 3px 6px #dddddd;
+	/*display: none;*/
+}
+
+#popbox {
+	display: none;
+}
+
+#popbox li {
+	display: block;
+	width: 100%;
+}
+
+.hd .popbox ul li {
+	display: block;
+	border-bottom: 1px solid #dadada;
+	border-width: 0 0 1px 0;
+	position: relative;
+}
+
+.hd .popbox ul li a {
+	display: block;
+	line-height: 40px;
+	padding: 0px 10px;
+	color: #5a5a5a;
+	-webkit-box-align: initial;
+	-webkit-box-pack: inherit;
+}
+
+.popsort {
+	display: block !important;
+	z-index: 1000000;
+}
+
+.on {
+	background: url(../images/yes.png)no-repeat right center;
+	background-size: 24px;
+	background-origin: content-box;
+}
+
+.bd {
+	background-color: #f1f1f1;
+	padding: 6px 0px;
+}
+.bd ul {
+	padding: 5px 5px;
+}
+.bd ul li{
+	float: left;
+    width: 50%;
+    background: #f5f5f5;
+    border: 1px solid #f5f5f5;
+}
+.bd li a {
+    display: block;
+    margin: 4px;
+    background-color: #ffffff;
+}
+.bd .pic {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    overflow: hidden;
+}
+ .bd .title {
+    color: #333333;
+    word-break: break-all;
+    padding: 0 6px;
+    height: 14px;
+    overflow: hidden;
+    font-size: 12px;
+    margin-top: 10px;
+    line-height: 14px;
+    font-weight: normal;
+    text-align: left;
+    margin-top: 6px;
+}
+.bd .other {
+    padding: 6px;
+}
+.bd .other .price {
+    float: left;
+    color: #f8601d;
+    font-size: 20px;
+}
